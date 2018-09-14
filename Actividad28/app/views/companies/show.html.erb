@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<h2>Agregar nuevo empleado</h2>
+<%= form_with(model: [ @company, @employee ], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+  <div class="form-group">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div class="form-group">
+    <%= fields_for :area do |area_field| %>
+      <%= form.label :area %>
+      <%= form.select :area, @areas %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Agregar'%>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="2">Apellido</th>
+      <th>email</th>
+      <th>Area</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.first_name %></td>
+        <td><%= employee.last_name %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.area %></td>
+        <td><%= link_to "despedir", company_employee_path(@company, employee),
+      method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
