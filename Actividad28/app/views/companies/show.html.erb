@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+  <h1><strong>Compañia: </strong> <%= @company.name %></h1>
+
 
 <h2>Agregar nuevo empleado</h2>
 <%= form_with(model: [ @company, @employee ], local: true) do |form| %>
@@ -26,17 +24,17 @@
     <% end %>
   </div>
   <div class="actions">
-    <%= form.submit 'Agregar'%>
+    <%= form.submit 'Agregar', class: 'btn btn-success'%>
   </div>
 <% end %>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th colspan="2">Apellido</th>
-      <th>email</th>
-      <th>Area</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">email</th>
+      <th scope="col">Area</th>
     </tr>
   </thead>
 
@@ -48,7 +46,7 @@
         <td><%= employee.email %></td>
         <td><%= employee.area %></td>
         <td><%= link_to "despedir", company_employee_path(@company, employee),
-      method: :delete %></td>
+      method: :delete, class: 'btn btn-primary btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>
